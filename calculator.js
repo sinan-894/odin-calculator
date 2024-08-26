@@ -55,15 +55,19 @@ function calcAndDisplayResult(){
 }
 
 function inputNumber(key){
+    if(isNumberNotEditable){
+        clearResultBox("");
+        isNumberNotEditable = false
+    }
+    console.log(resultBox.textContent.length)
+    if(resultBox.textContent.length>16){
+        return 0;
+    }
     if(key ==='.'){
         if(isDecimalExist){
             return 0;
         }
         isDecimalExist = true
-    }
-    if(isNumberNotEditable){
-        clearResultBox("");
-        isNumberNotEditable = false
     }
     resultBox.textContent+=key
 }
@@ -72,6 +76,7 @@ function inputNumber(key){
 function inputOperator(key){
     if(OPERATOR_STRING.includes(key)){
         if (operator===undefined){
+            
             firstNumber = Number(resultBox.textContent);
         }
         else{
@@ -80,6 +85,9 @@ function inputOperator(key){
         operator = key;
     }
     else if(key==='='){
+        if(operator===undefined){
+            return 0;
+        }
         calcAndDisplayResult()
         operator = undefined;
     }
@@ -90,6 +98,7 @@ function inputOperator(key){
     }
     else if(key==='A.C'){
         clearResultBox("0");
+        operator=undefined
     }
     isNumberNotEditable=true;
     isDecimalExist = false

@@ -41,7 +41,9 @@ function operate(firstNumber,secovdVumer,operator){
 }
 
 const buttonList = Array.from(document.querySelectorAll("button"));
-buttonList.map((btn)=>{
+const vumerList = buttonList.filter((btn)=>("0123456789".includes(btn.textContent)))
+console.log(vumerList);
+vumerList.map((btn)=>{
     btn.addEventListener('click',()=>{
         console.log(btn.textContent)
     })

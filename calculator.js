@@ -54,6 +54,68 @@ function calcAndDisplayResult(){
     firstNumber = result;
 }
 
+function inputNumber(key){
+    if(key ==='.'){
+        if(isDecimalExist){
+            return 0;
+        }
+        isDecimalExist = true
+    }
+    if(isNumberNotEditable){
+        clearResultBox("");
+        isNumberNotEditable = false
+    }
+    resultBox.textContent+=key
+}
+
+
+function inputOperator(key){
+    if(OPERATOR_STRING.includes(key)){
+        if (operator===undefined){
+            firstNumber = Number(resultBox.textContent);
+        }
+        else{
+            calcAndDisplayResult();
+        }
+        operator = key;
+    }
+    else if(key==='='){
+        calcAndDisplayResult()
+        operator = undefined;
+    }
+    else if(key==='C'){
+        resultBox.textContent = resultBox.textContent.slice(0,resultBox.textContent.length-1);
+
+    }
+    else if(key==='A.C'){
+        clearResultBox("0");
+    }
+    isNumberNotEditable=true;
+    isDecimalExist = false
+    console.log(key)
+}
+
+function convertKeyboardKeyToMathOperator(key){
+    switch(key){
+        case 'Enter':
+            return '=';
+            break;
+        case 'Backspace':
+            return 'C';
+            break;
+        case 'Delete':
+            return 'A.C'
+            break;
+        default:
+            return key
+            
+    }
+
+}
+
+
+
+
 
 
 
@@ -78,48 +140,27 @@ clearResultBox = (str)=>resultBox.textContent = str;
 console.log(numberList);
 numberList.map((btn)=>{
     btn.addEventListener('click',()=>{
-        if(btn.textContent ==='.'){
-            if(isDecimalExist){
-                return 0;
-            }
-            isDecimalExist = true
-        }
-        if(isNumberNotEditable){
-            clearResultBox("");
-            isNumberNotEditable = false
-        }
-        resultBox.textContent+=btn.textContent
+        inputNumber(btn.textContent)
     })
 })
 const operatorList = buttonList.filter((btn)=>!(NUMBER_STRING.includes(btn.textContent)))
 operatorList.map((btn)=>{
     btn.addEventListener('click',()=>{
-        if(OPERATOR_STRING.includes(btn.textContent)){
-            if (operator===undefined){
-                firstNumber = Number(resultBox.textContent);
-            }
-            else{
-                calcAndDisplayResult();
-            }
-            operator = btn.textContent;
-        }
-        else if(btn.textContent==='='){
-            calcAndDisplayResult()
-            operator = undefined;
-        }
-        else if(btn.textContent==='C'){
-            resultBox.textContent = resultBox.textContent.slice(0,resultBox.textContent.length-1);
-
-        }
-        isNumberNotEditable=true;
-        isDecimalExist = false
-        console.log(btn.textContent)
+        inputOperator(btn.textContent)
     })
      
 })
 
 document.addEventListener('keyup',(event)=>{
-    console.log(event.key);
+    key = convertKeyboardKeyToMathOperator(event.key);
+    console.log(key+'somethig');
+    if(NUMBER_STRING.includes(key)){
+        inputNumber(key)
+    }
+    else{
+        inputOperator(key)
+
+    }
 })
 
 

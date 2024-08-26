@@ -49,8 +49,6 @@ function calcAndDisplayResult(){
 }
 
 
-<<<<<<< HEAD
-=======
 const OPERATOR_STRING = '+-*/';
 const NUMBER_STRING = "0123456789."
 let firstNumber = undefined
@@ -62,17 +60,12 @@ const resultBox = document.querySelector('.display');
 let isNumberNotEditable = true;
 let isDecimalExist = false
 clearResultBox = (str)=>resultBox.textContent = str;
->>>>>>> parent of 8dc67fd (Add modulo and backspace functions)
 
 
 
 
-<<<<<<< HEAD
-function getNumberInput(btn){
-=======
 console.log(numberList);
 numberList.map((btn)=>{
->>>>>>> parent of 8dc67fd (Add modulo and backspace functions)
     btn.addEventListener('click',()=>{
         if(btn.textContent ==='.'){
             if(isDecimalExist){
@@ -86,9 +79,9 @@ numberList.map((btn)=>{
         }
         resultBox.textContent+=btn.textContent
     })
-}
-
-function getOperatorInput(btn){
+})
+const operatorList = buttonList.filter((btn)=>!(NUMBER_STRING.includes(btn.textContent)))
+operatorList.map((btn)=>{
     btn.addEventListener('click',()=>{
         if(OPERATOR_STRING.includes(btn.textContent)){
             if (operator===undefined){
@@ -110,39 +103,6 @@ function getOperatorInput(btn){
         isDecimalExist = false
         console.log(btn.textContent)
     })
-<<<<<<< HEAD
-     
-}
-
-
-
-
-
-const OPERATOR_STRING = '+-*/%';
-const NUMBER_STRING = "0123456789."
-let firstNumber = undefined
-let secondNumber = undefined
-let operator = undefined
-const buttonList = Array.from(document.querySelectorAll("button"));
-const resultBox = document.querySelector('.display');
-let isNumberNotEditable = true;
-let isDecimalExist = false
-clearResultBox = (str)=>resultBox.textContent = str;
-
-
-
-const numberButtonList = buttonList.filter((btn)=>(NUMBER_STRING.includes(btn.textContent)))
-console.log(numberButtonList);
-numberButtonList.map(getNumberInput)
-
-
-const operatorButtonList = buttonList.filter((btn)=>!(NUMBER_STRING.includes(btn.textContent)))
-operatorButtonList.map(getOperatorInput)
-
-document.addEventListener('keyup',(event)=>{
-    console.log(event.key);
-=======
->>>>>>> parent of 8dc67fd (Add modulo and backspace functions)
 })
 
 

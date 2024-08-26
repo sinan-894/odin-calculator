@@ -49,18 +49,30 @@ function calcAndDisplayResult(){
 }
 
 
-const operatorStr = '+-*/';
+const OPERATOR_STRING = '+-*/';
+const NUMBER_STRING = "0123456789."
 let firstNumber = undefined
 let secondNumber = undefined
 let operator = undefined
 const buttonList = Array.from(document.querySelectorAll("button"));
-const numberList = buttonList.filter((btn)=>("0123456789".includes(btn.textContent)))
+const numberList = buttonList.filter((btn)=>(NUMBER_STRING.includes(btn.textContent)))
 const resultBox = document.querySelector('.display');
 let isNumberNotEditable = true;
+let isDecimalExist = false
 clearResultBox = (str)=>resultBox.textContent = str;
+
+
+
+
 console.log(numberList);
 numberList.map((btn)=>{
     btn.addEventListener('click',()=>{
+        if(btn.textContent ==='.'){
+            if(isDecimalExist){
+                return 0;
+            }
+            isDecimalExist = true
+        }
         if(isNumberNotEditable){
             clearResultBox("");
             isNumberNotEditable = false
@@ -68,10 +80,10 @@ numberList.map((btn)=>{
         resultBox.textContent+=btn.textContent
     })
 })
-const operatorList = buttonList.filter((btn)=>!("0123456789".includes(btn.textContent)))
+const operatorList = buttonList.filter((btn)=>!(NUMBER_STRING.includes(btn.textContent)))
 operatorList.map((btn)=>{
     btn.addEventListener('click',()=>{
-        if(operatorStr.includes(btn.textContent)){
+        if(OPERATOR_STRING.includes(btn.textContent)){
             if (operator===undefined){
                 firstNumber = Number(resultBox.textContent);
             }
@@ -88,6 +100,7 @@ operatorList.map((btn)=>{
             clearResultBox('0');
         }
         isNumberNotEditable=true;
+        isDecimalExist = false
         console.log(btn.textContent)
     })
 })

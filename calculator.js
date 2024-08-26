@@ -17,6 +17,9 @@ function divide(a,b){
     return a/b;
 
 }
+function modulo(a,b){
+    return a%b;
+}
 
 
 function operate(firstNumber,secondNumber,operator){
@@ -32,6 +35,9 @@ function operate(firstNumber,secondNumber,operator){
             break;
         case "/":
             return divide(firstNumber,secondNumber);
+            break;
+        case '%':
+            return modulo(firstNumber,secondNumber);
             break;
         default:
             console.log("enter valid operator");
@@ -49,7 +55,12 @@ function calcAndDisplayResult(){
 }
 
 
-const OPERATOR_STRING = '+-*/';
+
+
+
+
+
+const OPERATOR_STRING = '+-*/%';
 const NUMBER_STRING = "0123456789."
 let firstNumber = undefined
 let secondNumber = undefined
@@ -96,13 +107,19 @@ operatorList.map((btn)=>{
             calcAndDisplayResult()
             operator = undefined;
         }
-        else{
-            clearResultBox('0');
+        else if(btn.textContent==='C'){
+            resultBox.textContent = resultBox.textContent.slice(0,resultBox.textContent.length-1);
+
         }
         isNumberNotEditable=true;
         isDecimalExist = false
         console.log(btn.textContent)
     })
+     
+})
+
+document.addEventListener('keyup',(event)=>{
+    console.log(event.key);
 })
 
 

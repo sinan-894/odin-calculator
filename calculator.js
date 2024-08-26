@@ -85,6 +85,7 @@ function inputOperator(key){
     }
     else if(key==='C'){
         resultBox.textContent = resultBox.textContent.slice(0,resultBox.textContent.length-1);
+        return 0;
 
     }
     else if(key==='A.C'){

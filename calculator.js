@@ -17,6 +17,9 @@ function divide(a,b){
     return a/b;
 
 }
+function modulo(a,b){
+    return a%b;
+}
 
 
 function operate(firstNumber,secondNumber,operator){
@@ -33,6 +36,9 @@ function operate(firstNumber,secondNumber,operator){
         case "/":
             return divide(firstNumber,secondNumber);
             break;
+        case '%':
+            return modulo(firstNumber,secondNumber);
+            break;
         default:
             console.log("enter valid operator");
             break;
@@ -48,28 +54,12 @@ function calcAndDisplayResult(){
     firstNumber = result;
 }
 
-<<<<<<< HEAD
+
+
+
+
+
 function getNumberInput(btn){
-=======
-
-const OPERATOR_STRING = '+-*/';
-const NUMBER_STRING = "0123456789."
-let firstNumber = undefined
-let secondNumber = undefined
-let operator = undefined
-const buttonList = Array.from(document.querySelectorAll("button"));
-const numberList = buttonList.filter((btn)=>(NUMBER_STRING.includes(btn.textContent)))
-const resultBox = document.querySelector('.display');
-let isNumberNotEditable = true;
-let isDecimalExist = false
-clearResultBox = (str)=>resultBox.textContent = str;
-
-
-
-
-console.log(numberList);
-numberList.map((btn)=>{
->>>>>>> parent of 8dc67fd (Add modulo and backspace functions)
     btn.addEventListener('click',()=>{
         if(btn.textContent ==='.'){
             if(isDecimalExist){
@@ -100,14 +90,14 @@ function getOperatorInput(btn){
             calcAndDisplayResult()
             operator = undefined;
         }
-        else{
-            clearResultBox('0');
+        else if(btn.textContent==='C'){
+            resultBox.textContent = resultBox.textContent.slice(0,resultBox.textContent.length-1);
+
         }
         isNumberNotEditable=true;
         isDecimalExist = false
         console.log(btn.textContent)
     })
-<<<<<<< HEAD
      
 }
 
@@ -138,8 +128,6 @@ operatorButtonList.map(getOperatorInput)
 
 document.addEventListener('keyup',(event)=>{
     console.log(event.key);
-=======
->>>>>>> parent of 8dc67fd (Add modulo and backspace functions)
 })
 
 

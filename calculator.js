@@ -40,3 +40,12 @@ function operate(firstNumber,secovdVumer,operator){
     }
 }
 
+const buttonList = Array.from(document.querySelectorAll("button"));
+buttonList.map((btn)=>{
+    btn.addEventListener('click',()=>{
+        console.log(btn.textContent)
+    })
+})
+
+
+

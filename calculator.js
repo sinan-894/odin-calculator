@@ -54,29 +54,7 @@ function calcAndDisplayResult(){
     firstNumber = result;
 }
 
-
-
-
-
-
-
-const OPERATOR_STRING = '+-*/%';
-const NUMBER_STRING = "0123456789."
-let firstNumber = undefined
-let secondNumber = undefined
-let operator = undefined
-const buttonList = Array.from(document.querySelectorAll("button"));
-const numberList = buttonList.filter((btn)=>(NUMBER_STRING.includes(btn.textContent)))
-const resultBox = document.querySelector('.display');
-let isNumberNotEditable = true;
-let isDecimalExist = false
-clearResultBox = (str)=>resultBox.textContent = str;
-
-
-
-
-console.log(numberList);
-numberList.map((btn)=>{
+function getNumberInput(btn){
     btn.addEventListener('click',()=>{
         if(btn.textContent ==='.'){
             if(isDecimalExist){
@@ -90,9 +68,9 @@ numberList.map((btn)=>{
         }
         resultBox.textContent+=btn.textContent
     })
-})
-const operatorList = buttonList.filter((btn)=>!(NUMBER_STRING.includes(btn.textContent)))
-operatorList.map((btn)=>{
+}
+
+function getOperatorInput(btn){
     btn.addEventListener('click',()=>{
         if(OPERATOR_STRING.includes(btn.textContent)){
             if (operator===undefined){
@@ -116,7 +94,32 @@ operatorList.map((btn)=>{
         console.log(btn.textContent)
     })
      
-})
+}
+
+
+
+
+
+const OPERATOR_STRING = '+-*/%';
+const NUMBER_STRING = "0123456789."
+let firstNumber = undefined
+let secondNumber = undefined
+let operator = undefined
+const buttonList = Array.from(document.querySelectorAll("button"));
+const resultBox = document.querySelector('.display');
+let isNumberNotEditable = true;
+let isDecimalExist = false
+clearResultBox = (str)=>resultBox.textContent = str;
+
+
+
+const numberButtonList = buttonList.filter((btn)=>(NUMBER_STRING.includes(btn.textContent)))
+console.log(numberButtonList);
+numberButtonList.map(getNumberInput)
+
+
+const operatorButtonList = buttonList.filter((btn)=>!(NUMBER_STRING.includes(btn.textContent)))
+operatorButtonList.map(getOperatorInput)
 
 document.addEventListener('keyup',(event)=>{
     console.log(event.key);
